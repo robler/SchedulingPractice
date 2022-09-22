@@ -8,3 +8,4 @@ call demo.cmd acetaxxxx
 call demo.cmd demo
 call demo.cmd borischin
 call demo.cmd levichen
+call demo.cmd bob

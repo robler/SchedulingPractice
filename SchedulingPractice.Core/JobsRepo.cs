@@ -27,7 +27,7 @@ namespace SchedulingPractice.Core
 
             if (string.IsNullOrEmpty(connstr))
             {
-                this._conn = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=JobsDB;Integrated Security=True;");
+                this._conn = new SqlConnection(@"Data Source=localhost\SQLEXPRESS;Database=JobsDB;Trusted_Connection=True;");
             }
             else
             {
@@ -41,16 +41,25 @@ namespace SchedulingPractice.Core
 
         public IEnumerable<JobInfo> GetReadyJobs(TimeSpan duration)
         {
-            return this._conn.Query<JobInfo>(
-                @"
-select * from [jobs] where state = 0 and datediff(millisecond, getdate(), runat) < @msec order by runat asc;
-insert [workerlogs] (action, clientid, results) values ('QUERYLIST', @client, @@rowcount);
-",
-                new
-                {
-                    msec = duration.TotalMilliseconds,
-                    client = this._client,
-                });
+            try
+            {
+                return this._conn.Query<JobInfo>(
+                    @"
+                select * from [jobs] where state = 0 and datediff(millisecond, getdate(), runat) < @msec order by runat asc;
+                insert [workerlogs] (action, clientid, results) values ('QUERYLIST', @client, @@rowcount);
+                ",
+                    new
+                    {
+                        msec = duration.TotalMilliseconds,
+                        client = this._client,
+                    });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return null;
+
         }
 
         public JobInfo GetJob(int jobid)

@@ -34,6 +34,7 @@ namespace SchedulingPractice.SubWorkerRunner
                 {
                     //services.AddHostedService<AndrewSubWorkerBackgroundService>();
                     //services.AddHostedService<AndrewSubWorkerBackgroundService2>();
+
                     if (mode == "demo") services.AddHostedService<SubWorker.AndrewDemo.AndrewSubWorkerBackgroundService>();
                     else if (mode == "andrew0928") services.AddHostedService<SubWorker.AndrewDemo.AndrewSubWorkerBackgroundService2>();
                     else if (mode == "andy19900208") services.AddHostedService<SubWorker.AndyDemo.AndySubWorkerBackgroundService>();
@@ -41,6 +42,7 @@ namespace SchedulingPractice.SubWorkerRunner
                     else if (mode == "borischin") services.AddHostedService<SubWorker.BorisDemo.BorisSubWorkerBackgroundService>();
                     else if (mode == "levichen") services.AddHostedService<SubWorker.LeviDemo.LeviSubWorkerBackgroundService>();
                     else if (mode == "jwchen-dev") services.AddHostedService<SubWorker.JWDemo.JWSubWorkerBackgroundServiceV2>();
+                    else if (mode == "bob") services.AddHostedService<SubWorker.BobDemo.BobSubWorkerBackgroundService>();
                     //else if (mode == "toyo0103") services.AddHostedService<SubWorker.JolinDemo.JolinSubWorkerBackgroundService>();
                     else if (mode == "toyo0103")
                     {
